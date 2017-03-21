@@ -2,92 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>图片轮播</title>
+    <title></title>
     <style>
+
         *{
             margin: 0;
             padding: 0;
         }
-        .container{
-            width: 100%;
-            height: 300px;
+        #container{
+            width: 700px;
+            height: 400px;
             position: relative;
-            top: 100px;
-            background: #2e75fc;
+            top: 50px;
+            margin: 0 auto;
+
+            overflow: hidden;
         }
-        .container .scene{
-            transform-style: preserve-3d;
-            position: absolute;
-            width: 600px;
-            height: 300px;
-            margin-left: -300px;
-            left: 50%;
+        @keyframes rotateInDownRight {
+            0% {
+                opacity: 0;
+                transform: rotate(90deg);
+                transform-origin: right bottom 0;
+            }
+            100% {
+                opacity: 1;
+                transform: rotate(0deg);
+                transform-origin: right bottom 0;
+            }
+        }
+        #container .container-img{
+            animation: rotateInDownRight 0.5s;
+            left: 0;
             top: 0;
-            transition: all 1s;
-        }
-        .container .scene li{
-            list-style: none;
+            width: 100%;
+            height: 100%;
             position: absolute;
         }
-        .container .scene li:nth-child(1){
-            transform: rotateY(0deg) translateZ(300px);
-        }
-        .container .scene li:nth-child(2){
-            transform: rotateY(90deg) translateZ(300px);
-        }
-        .container .scene li:nth-child(3){
-            transform: rotateY(180deg) translateZ(300px);
-        }
-        .container .scene li:nth-child(4){
-            transform: rotateY(270deg) translateZ(300px);
-        }
-        img{
-            width: 600px;
-            height: 300px;
-        }
-        .prev{
-            text-decoration: none;
+        #left{
+            border-radius: 50%;
+            opacity: 0;
+            width: 40px;
             position: absolute;
-            top: 45%;
             left: 1%;
-            font-size: 50px;
-            color: #ebfc81;
-        }
-        .next{
-            text-decoration: none;
-            position: absolute;
             top: 45%;
-            right: 1%;
-            font-size: 50px;
-            color: #ebfc81;
+            transition: opacity 1s;
         }
+        #right{
+            border-radius: 50%;
+            opacity: 0;
+            width: 40px;
+            position: absolute;
+            right: 1%;
+            top: 45%;
+            transition: opacity 1s;
+        }
+        #container:hover #right,#container:hover #left{
+            opacity: 0.5;
+        }
+
+        #container ul {
+            position: absolute;
+            left: 45%;
+            bottom: 20px;
+        }
+        #container ul li{
+            list-style: disc outside;
+            float: left;
+            margin: 0 10px 20px ;
+        }
+        .block-gray{
+            background: #eeedf2 none repeat scroll 0 0;
+            height: 550px;
+            padding: 50px 20px 30px;
+        }
+
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="scene">
+<div class="block-gray">
+    <div id="container"  >
+        <img class="container-img" src="../image/1.jpg" alt=""/>
+        <img class="container-img" src="../image/2.jpg" alt=""/>
+        <img class="container-img" src="../image/3.jpg" alt=""/>
+        <img class="container-img" src="../image/4.jpg" alt=""/>
+        <a href="#" onclick="slide(-1)"><img id="left" src="../image/左.png" alt=""/></a>
+        <a href="#" onclick="slide(1)"><img id="right" src="../image/右.png" alt=""/></a>
         <ul>
-            <li><img src="../image/1.jpg" alt=""/></li>
-            <li><img src="../image/2.jpg" alt=""/></li>
-            <li><img src="../image/3.jpg" alt=""/></li>
-            <li><img src="../image/4.jpg" alt=""/></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
         </ul>
-
     </div>
-    <a href="#" class="prev">&lt;</a>
-    <a href="#" class="next">&gt;</a>
 </div>
-<script src="../js/jquery-3.1.1.min.js"></script>
 <script>
-    var count = 0;
-    $(".prev").on("click",function(){
-        count--;
-        $(".scene").css("transform","rotateY("+90*count+"deg)");
-    });
-    $(".next").on("click",function(){
-        count++;
-        $(".scene").css("transform","rotateY("+90*count+"deg)");
-    })
+    window.onload = function(){
+        var obj1 = document.getElementsByClassName("container-img");
+        var obj2 = document.getElementsByTagName("li");
+        for(var i=1; i<obj1.length; i++){
+            obj1[i].style.display = "none";
+            obj2[i].style.listStyle = "circle outside";
+        }
+    };
+    var j = 0 ;
+    function slide(n){
+        document.getElementsByClassName("container-img")[j%4].style.display = "none";
+        document.getElementsByTagName("li")[Math.abs(j%4)].style.listStyle = "circle outside";
+        j = j + n+4;
+        document.getElementsByClassName("container-img")[j%4].style.display = "block";
+        document.getElementsByTagName("li")[Math.abs(j%4)].style.listStyle = "disc outside";
+    }
 </script>
 </body>
 </html>

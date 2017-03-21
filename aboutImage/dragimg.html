@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖动图片</title>
+    <style>
+        .drag{
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            left: 200px;
+            top: 50px;
+        }
+        .drag img{
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body  ondragstart="return false">
+
+<div class="drag">
+    <img src="../image/1.jpg" alt=""/>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script>
+    $(function(){
+        var isMove = false;//判断是否移动
+        var _x,_y;
+        var dragObj;
+        $(".drag").on("mousedown",function(e){
+            isMove = true;
+            dragObj = e.target.parentNode;
+            _x = e.clientX - parseInt($(dragObj).css("left"));
+            _y = e.clientY - parseInt($(dragObj).css("top"));
+            return false;
+        });
+        $(document).mousemove(function(e){
+            if(isMove){
+                var x = e.clientX - _x ;
+                var y = e.clientY - _y ;
+                $(dragObj).css({top:y,left:x});
+            }
+        }).mouseup(function(){
+            isMove = false;
+        });
+    });
+
+</script>
+</body>
+</html>

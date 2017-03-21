@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #table{
+            border-collapse:collapse;
+            margin: 50px auto 0;
+            border: 2px solid black;
+
+        }
+        #table tr{
+            height: 30px;
+        }
+        #table tr td{
+            height: 30px;
+            border: 2px solid black;
+            width: 30px;
+            background: gray;
+            text-align: center;
+        }
+        #table tr td img{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+
+
+    <script src="../js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<!--16*16的表格，40个雷-->
+<table id="table">
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+<script>
+
+
+    var count = 40;//定义雷的格数
+    var line_length = 16;//定义列的格数
+    var height_length = 16;//定义行的格数
+    var arry = [];//雷的数组表示
+
+    var mineArry = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];//整个表格的数组表示
+
+    //生成40个不重复的随机数
+    var repeat = false;//标志
+
+    var temp;//记录第i个产生的随机数
+    var n,m;//整个表格的数组下标
+    //初始化雷区的函数
+    function initLeiqu(){
+        for(n=0; n<height_length; n++){
+            for(m=0; m<line_length; m++){
+                mineArry[n][m] = 0;
+            }
+        }
+    }
+    //显示雷个数的函数
+    function shuLiang(x,y){
+        if(x>0){
+            mineArry[x-1][y]++;
+        }
+        if(x<height_length-1){
+            mineArry[x+1][y]++;
+        }
+        if(y>0){
+            mineArry[x][y-1]++;
+        }
+        if(y<line_length-1){
+            mineArry[x][y+1]++;
+        }
+
+        if(x>0 && y>0){
+            mineArry[x-1][y-1]++;
+        }
+        if(x>0 && y<line_length-1){
+            mineArry[x-1][y+1]++;
+        }
+        if(x<height_length-1 && y>0){
+            mineArry[x+1][y-1]++;
+        }
+        if(x<height_length-1 && y<line_length-1){
+            mineArry[x+1][y+1]++;
+        }
+    }
+
+
+    initLeiqu();//初始化
+    /*alert(mineArry);*/
+    //生成count个随机数
+    arry[0] = 4;
+    /*mineArry[0][4] = 100;
+    shuLiang(0,4);
+    document.getElementsByTagName("td")[arry[0]].innerHTML = "<p >雷</p>";*/
+    for(var i=1; i<count; i++){
+        repeat = false;
+        temp = Math.floor(Math.random()*line_length*height_length);
+        for(var j=0; j<i; j++){
+            if(temp == arry[j]){
+                repeat = true;
+            }
+            if(repeat){
+                i = i-1;
+                break;
+            }else{
+                arry[i] = temp;
+                /*n = Math.floor(temp/line_length);
+                m = temp%line_length;
+                mineArry[n][m] = 100;//这个位置上有雷
+                shuLiang(n,m);//显示周围雷的个数
+                document.getElementsByTagName("td")[temp].innerHTML = "<p >雷</p>";*/
+            }
+        }
+    }
+    //雷区数字大于100，并计算周围的雷的个数
+    /*alert(arry);*/
+    for(i=0; i<count; i++){
+        n = Math.floor(arry[i]/line_length);
+        m = arry[i]%line_length;
+        mineArry[n][m] = 100;//这个位置上有雷
+        shuLiang(n,m);//计算周围雷的个数
+
+    }
+    //显示周围的雷的个数，并且display:none
+    /*alert(mineArry.length);*/
+    for(var k=0; k<line_length*height_length; k++){
+        var k_height = Math.floor(k/line_length);
+        var k_line = k%line_length;
+        document.getElementsByTagName("td")[k].innerHTML = "<p style='display:none'>"+ mineArry[k_height][k_line] +"</p>";
+    }
+
+
+
+    //去掉默认的contextmenu事件，否则会和右键事件同时出现。
+    document.oncontextmenu = function(e){
+        e.preventDefault();
+    };
+    //给每个表格定义value属性确定状态
+    $(function(){
+       $("td").attr({value:0});
+    });
+    //mousedown事件
+    $("td").mousedown(function(e){
+        if(e.which == 1){
+            if($(this).attr("value") == 0){
+                $(this).attr({value:2});//鼠标左击之后不会再右击了
+                $(this).css({"background":"white"});
+                $(this).find("p").show();
+                if($(this).find("p").text() >= 100){
+                    $(this).find("p").text("*");
+                    alert("you fail");
+                    location.reload();
+                }
+            }
+        }
+        if(e.which == 3){
+            if($(this).attr("value") == 0){
+                $(this).attr({value:1});
+                $(this).find("p").after("<img src='../image/1.jpg'/>");
+                /*alert($(this).attr("value"));*/
+            }else if($(this).attr("value") == 1){
+                $(this).attr({value:0});
+                $(this).find("img").remove();
+            }
+
+
+
+
+            /*if($(this).css("background-color") == "gray"){
+                $(this).css({background:"red"});
+                $(this).html("<img src='../image/1.jpg'/>")
+            }else{
+                $(this).html("");
+                $(this).css({background:"gray"});
+            }*/
+
+        }
+    })
+
+</script>
+</body>
+</html>

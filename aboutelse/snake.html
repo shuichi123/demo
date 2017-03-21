@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+    <style>
+        *{ padding:0; margin:0;   border:1px solid #000; text-align:center;}
+        #myt{ border:1px solid #000; text-align:center; }
+        table{ text-align:center; margin:0 auto;}
+        td{ width:20px; height:20px; border:1px solid #000;}
+        .col{animation:mydd 1s;}
+        .color{ background:#000;}
+        .grade{ background:#0F0;}
+
+
+    </style>
+    <script src="../js/jquery-3.1.1.min.js">
+    </script>
+    <script type="text/javascript">
+        var height = 20 ;	//行
+        var width = 30 ;	//列
+        var list = 1; 		//移动行
+        var row = 1;		//移动列
+        var fangxiang = 2;		//方向
+        var speed;				//速度
+        var tailspeed; 		//尾巴时间
+        var lenghts = 1;	//蛇的长度
+        var rlist;		//随机分数行
+        var rrow;		//随机分数列
+        var td = "<td></td>";
+        var tr = "<tr></tr>";
+
+        //画图
+        $(document).ready(function(){
+            for(var i= 0;i<width;i++){
+                td = td + "<td></td>"
+            }
+            for(var i= 0;i<height;i++){
+                tr = tr + "<tr></tr>"
+            }
+            $("#myt").html(tr);
+            $("#myt tr").each(function(index){
+                $(this).html(td);
+            });
+            start();
+        });
+
+        //开始
+        function start(){
+            mysnake = setInterval("xingzou()",250);
+            rlist = Math.floor(Math.random()*19+1);
+            rrow =  Math.floor(Math.random()*29+1);
+            $("#myt tr").eq(rlist).find("td").eq(rrow).attr("alt","2");
+
+        }
+
+        //控制
+        $(document).keydown(function(event){
+            if(event.keyCode == 38){
+                fangxiang = 1;
+            }
+            if(event.keyCode == 39){
+                fangxiang = 2;
+            }
+            if(event.keyCode == 40){
+                fangxiang = 3;
+            }
+            if(event.keyCode == 37){
+                fangxiang = 4;
+            }
+
+        });
+        //行走
+        function xingzou(){
+            switch(fangxiang)
+            {
+                case 1:
+                    shang();
+                    break;
+                case 2:
+                    you();
+                    break;
+                case 3:
+                    xia();
+                    break;
+                case 4:
+                    zuo();
+                    break;
+                default:
+            }
+            //add();
+            snake();
+            grade();
+            setTimeout("cle()",speed);
+
+        }
+        //方向
+        function shang(){
+            list--;
+        }
+        function you(){
+            row++;
+        }
+        function xia(){
+            list++;
+        }
+        function zuo(){
+            row--;
+        }
+        var arr = new Array();
+        //画蛇
+        function snake(){
+            $("#myt tr").each(function(index){
+                if(index == list){
+                    if($(this).find("td").eq(row).attr("class")=="color"){
+                        alert("自己怼死了自己！")
+
+                    }
+                    if($(this).find("td").eq(row).attr("alt")=="2"){
+                        lenghts = lenghts + 1;
+                        rep();
+                    }
+
+                    $(this).find("td").eq(row).attr("alt","1").addClass("color");
+                    arr.push($(this).find("td").eq(row));
+
+
+                }
+            });
+            speed = lenghts / 0.004;
+        }
+        //清除尾巴
+        function cle(){
+            if(arr!=null&&arr.length>0){
+                var obj = arr.shift();
+                obj.removeClass("color","grade").attr("alt","");
+            }
+        }
+
+        //分数
+        function grade(){
+            $("#myt tr").find("td").each(function(){
+                if($(this).attr("alt")=="2"){
+                    $(this).addClass("grade")
+                }else{
+                    $(this).removeClass("grade")
+                }
+            });
+            if(list >= 21 || list < 0){
+                var r = confirm("自己怼死了！是否续命 + 1s 请点确定")
+                if(confirm("自己怼死了！是否续命+ 1s")){
+                    alert("续不了了 想续命 请冲钱! 蛤蛤")
+                    history.go(0) ;
+                }
+                if(!confirm("自己怼死了！是否续命+ 1s")){
+                    history.go(0) ;
+                }
+            }
+            if(row >= 31 || row < 0){
+                if(confirm("自己怼死了！是否续命+ 1s 请点确定")){
+                    alert("续不了了 想续命 请冲钱! 蛤蛤")
+                    history.go(0) ;
+                }
+                if(!confirm("自己怼死了！是否续命+ 1s")){
+                    history.go(0) ;
+                }
+            }
+        }
+        //重复刷新
+        function rep(){
+            rlist = Math.floor(Math.random()*19+1);
+            rrow =  Math.floor(Math.random()*29+1);
+            $("#myt tr").eq(rlist).find("td").eq(rrow).attr("alt","2");
+        }
+        //尾巴
+        function tail(){
+            $("#myt tr").find("td").each(function(index){
+                if($(this).attr("alt") == "1"){
+                    $(this).removeClass("color");
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+分数：<div>123</div>
+<table id="myt"    align="center">
+</table>
+</body>
+</html>
