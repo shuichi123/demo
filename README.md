@@ -1,2 +1,2 @@
 # hello
-just for study 
+just for study and fun！
