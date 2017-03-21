@@ -236,7 +236,7 @@ p, li, a{
 }
 
 #hamburger-6.is-active .line:nth-child(2){
-  width: 0px;
+  width: 0;
 }
 
 #hamburger-6.is-active .line:nth-child(1),
