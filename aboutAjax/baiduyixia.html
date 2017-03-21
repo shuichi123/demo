@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模仿百度一下搜索框</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #sub{
+            width: 300px;
+            height: 400px;
+            background: #76f4fc;
+            text-align: center;
+            margin: 100px auto;
+        }
+        #list li{
+            list-style: none;
+            margin: 10px auto;
+            font-size: 20px;
+            color: #fc8764;
+        }
+    </style>
+</head>
+<body>
+<div id="sub">
+    <div>
+        <label><input type="text" id="keyword" autocomplete="off"/></label>
+        <input type="button" value="百度一下" id="btn"/>
+    </div>
+    <div id="list">
+
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script>
+    //9971121346085
+    //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=&json=1&p=3&sid=1441_21096_22036_22157&req=2&bs=SyntaxError&pbs=SyntaxError&sc=eb&csor=0&cb=jQuery110209400796843507124_1489562469473&_=1489562469502
+    //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=
+    $(function(){
+        $("#keyword").keyup(function(){
+            var kw = $("#keyword").val();
+            var url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+kw;
+            querySUB(url);
+        })
+    });
+    function querySUB(url){
+        document.getElementById("list").innerHTML = "";
+        $.ajax({
+            type:"get",
+            async:true,
+            url:url,
+            dataType:"jsonp",
+            jsonp:"cb",
+            /*jsonpCallback:"callback",*/
+            success:function(data){
+                console.log(data.s);
+                var ul=$("<ul></ul>");
+                $.each(data.s,function(index,ele){
+                    var e=$("<li></li>").append(ele);
+                    $(ul).append(e);
+                });
+                $("#list").append(ul);
+            },
+            error:function(){
+                console.log("fail");
+            }
+        });
+    }
+</script>
+</body>
+</html>

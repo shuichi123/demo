@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="searchQQName"></div>
+<input type="text" id="qqName"/>
+<input type="button" value="查询" id="btn"/>
+
+<script>
+    var btn = document.getElementById("btn");
+    btn.onclick = function(){
+        var num = document.getElementById("qqName").value;
+        //http://r.pengyou.com/fcg-bin/cgi_get_portrait.fcg?uins=QQ号码
+        var url = "http://r.pengyou.com/fcg-bin/cgi_get_portrait.fcg?uins="+num;
+        var script = document.createElement("script");
+        script.src = url;
+        script.id = "scriptQQ";
+        document.body.appendChild(script);
+    };
+    function portraitCallBack(data){
+        console.log(data);
+        var qq = "2281918199";
+        for(var key in data){
+            alert("qq"+key);
+        }
+        console.log(data[qq][6]);
+    }
+
+</script>
+</body>
+</html>

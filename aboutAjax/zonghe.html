@@ -1,0 +1,286 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>综合案例演示</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="http://cdn.asilu.com/bootstrap.css,bootstrap-theme.css,prettify-2.css">
+    <script src="http://cdn.asilu.com/jquery.js"></script>
+    <script src="http://cdn.asilu.com/template.js,ja.json.js,prettify.js"></script>
+    <style>
+        .dn{display: none;}
+        pre {
+            tab-size:4;
+            -moz-tab-size:4;
+            -o-tab-size:4;
+        }
+    </style>
+    <style>body{  background: url(https://cn.bing.com/az/hprichbg/rb/MousaBroch_ZH-CN11732543982_1920x1080.jpg) no-repeat top center;  background-attachment: fixed;  background-clip: border-box;  background-origin: padding-box;  background-size: cover;  }<style></style></head>
+<body>
+
+
+
+<div class="container">
+    <div class="col-sm-offset-1 col-sm-10" style="background-color:rgba(255,255,255,.9);">
+        <h1>在线 JSONP 接口测试<small>简爱</small></h1>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-3 control-label">接口选择:</label>
+                <div class="col-xs-9">
+                    <select class="form-control input-sm dom-list">
+                        <option value="0">天气查询</option>
+
+                        <option value="1">IP 查询</option>
+
+                        <option value="2">身份证校验</option>
+
+                        <option value="3">翻译</option>
+
+                        <option value="4">Bing 壁纸获取</option>
+
+                        <option value="5">芒果 TV 视频获取</option>
+
+                        <option value="6">快递查询</option>
+
+                        <option value="7">获取用户设备信息</option>
+
+                        <option value="8">RSS 订阅信息获取</option>
+
+                        <option value="9">手机归属地查询</option>
+
+                        <option value="10">百度音乐搜索</option>
+
+                        <option value="11">网易音乐信息</option>
+
+                        <option value="12">豆瓣信息获取</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="dom-form"><div class="col-sm-offset-3 col-sm-9">
+            <table class="table table-bordered table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>地址</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>翻译</td>
+                    <td>http://api.asilu.com/fanyi/</td>
+                </tr>
+
+                </tbody>
+            </table>
+
+
+            <table class="table table-bordered table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>name</th>
+                    <th>默认值</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td>要翻译的内容</td>
+                    <td>q</td>
+                    <td>I love you</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>类型</td>
+                    <td>type</td>
+                    <td></td>
+                    <td>选填 如果需要查询单词传 dict</td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+            <form class="form-horizontal ajax-submit" action="http://api.asilu.com/fanyi/">
+
+                <div class="form-group">
+                    <label for="input-q" class="col-xs-3 control-label">要翻译的内容:</label>
+                    <div class="col-xs-9">
+
+                        <input type="text" id="input-q" class="form-control input-sm" name="q" value="I love you" placeholder="要翻译的内容">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-type" class="col-xs-3 control-label">类型:</label>
+                    <div class="col-xs-9">
+
+                        <input type="text" id="input-type" class="form-control input-sm" name="type" value="" placeholder="类型">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <button type="submit" class="btn btn-success btn-sm">提交</button>
+                    </div>
+                </div>
+
+                <div class="api-data"></div>
+                <pre class="api-json prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pun">{</span></li><li class="L1"><span class="pln">	</span><span class="str">"error"</span><span class="pun">:</span><span class="lit">0</span><span class="pun">,</span></li><li class="L2"><span class="pln">	</span><span class="str">"data"</span><span class="pun">:</span><span class="str">"我爱你"</span><span class="pun">,</span></li><li class="L3"><span class="pln">	</span><span class="str">"from"</span><span class="pun">:</span><span class="str">"en"</span><span class="pun">,</span></li><li class="L4"><span class="pln">	</span><span class="str">"to"</span><span class="pun">:</span><span class="str">"zh"</span></li><li class="L5"><span class="pun">}</span></li></ol></pre>
+
+                <input type="hidden" id="jsonp" value="callback">
+            </form></div>
+
+        <div class="col-sm-offset-3 col-sm-9">
+            <p>
+                <a href="http://www.gouji.org" title="访问简爱的个人主页">
+                    <img alt="简爱" src="http://api.asilu.com/favicon/?http://www.gouji.org/" style="width:24px;height:24px;">
+                </a>
+                联系邮箱:<a class="btn btn-default btn-xs" href="mailto:sc.419@qq.com">sc.419@qq.com</a>
+            </p>
+            <p>
+                <code>Powered by <a href="http://www.gouji.org" title="简爱博客">简爱博客</a></code> | <code><a href="http://www.miibeian.gov.cn" target="_blank">鲁ICP备15004254号-1</a></code>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<template id="tpl-list" class="dn">
+    {{each list as ja i}}
+    <option value="{{i}}">{{ja.title}}</option>
+    {{/each}}
+</template>
+
+
+<script type="text/tpl" id="tpl-form" class="dn">
+	<div class="col-sm-offset-3 col-sm-9">
+		<table class="table table-bordered table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>名称</th>
+					<th>地址</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{title}}</td>
+					<td>{{url}}</td>
+				</tr>
+				{{if desc}}
+				<tr>
+					<td colspan=2>{{desc}}</td>
+				</tr>
+				{{/if}}
+			</tbody>
+		</table>
+
+		{{if data && data.length > 0}}
+		<table class="table table-bordered table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>名称</th>
+					<th>name</th>
+					<th>默认值</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{each data as ja i}}
+				<tr>
+					<td>{{ja.title}}</td>
+					<td>{{ja.name}}</td>
+					<td>{{ja.value}}</td>
+					<td>{{ja.desc}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		{{/if}}
+	</div>
+
+
+	<form class="form-horizontal ajax-submit" action="{{url}}">
+		{{each data as ja i}}
+		<div class="form-group">
+			<label for="input-{{ja.name}}" class="col-xs-3 control-label">{{ja.title}}:</label>
+			<div class="col-xs-9">
+				{{if ja.rows}}
+				<textarea  id="input-{{ja.name}}" class="form-control input-sm" name="{{ja.name}}" placeholder="{{ja.title}}" style="resize: none;" rows="{{ja.rows}}"
+				{{ja.readonly?'readonly':''}}
+				>{{ja.value}}</textarea>
+				{{else}}
+				<input type="text" id="input-{{ja.name}}" class="form-control input-sm" name="{{ja.name}}" value="{{ja.value}}" placeholder="{{ja.title}}" {{ja.readonly?'readonly':''}}/>
+				{{/if}}
+			</div>
+		</div>
+		{{/each}}
+		<div class="form-group">
+			<div class="col-xs-offset-3 col-xs-9">
+				<button type="submit" class="btn btn-success btn-sm">提交</button>
+			</div>
+		</div>
+
+		<div class="api-data"></div>
+		<pre class="api-json prettyprint linenums"></pre>
+
+		<input type="hidden" id="jsonp" value="{{jsonp?json:'callback'}}"/>
+	</form>
+</script>
+
+<script src="http://cdn.asilu.com/api.js"></script>
+<script>
+    var curApi;
+    $('.dom-list').html(template('tpl-list', apis)).on('change', setApi);
+    setApi();
+
+    function setApi(){
+        curApi = $('.dom-list').val();
+        $('.dom-form').html(template('tpl-form', apis.list[curApi]));
+    }
+
+    $(document)
+            .on('submit', '.ajax-submit', function(e){
+                var $that = $(this),
+                        _data = $that.serialize(),
+                        _url = $that.attr('action');
+
+                e.preventDefault();
+
+                $.getJSON(_url +'?'+ $that.find('input#jsonp').val() +'=?&'+ _data, function(s){
+                    console.log(s);
+                    $('.api-json').html(prettyPrintOne(formatJSON(s, '\t'), 'json', true));
+                    if(typeof apis.list[curApi].func == 'function'){
+                        $('.api-data').html(apis.list[curApi].func(s));
+                    }
+                });
+            });
+
+
+
+
+    $.ajax({
+        url: "http://api.asilu.com/bg/?callback=?",
+        dataType: "jsonp",
+        cache: true,
+        jsonpCallback: "jsonpBgCallback",
+        success: function(a) {
+            if (!a || !a.images) {
+                return
+            }
+            $("head").append("<style>body{  background: url(" + a.images[0].url + ") no-repeat top center;  background-attachment: fixed;  background-clip: border-box;  background-origin: padding-box;  background-size: cover;  }<style>");
+            $("body").removeClass("bg-1")
+        }
+    });
+
+
+
+</script>
+
+</body></html>

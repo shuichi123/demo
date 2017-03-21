@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快递查询等</title>
+    <style>
+        .container{
+            width: 49%;
+            display: inline-block;
+        }
+        h1{
+            color: #fc4c95;
+            text-align: center;
+        }
+        .kuaidi{
+            border: 1px solid gray;
+            background: #befc84;
+            width: 300px;
+            height: 300px;
+            overflow: auto;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .kuaidi input{
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            width: 80%;
+        }
+        .fanyi{
+            border: 1px solid gray;
+            background: #befc84;
+            width: 300px;
+            height: 300px;
+            overflow: auto;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .fanyi input{
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            width: 80%;
+        }
+        .weather{
+            border: 1px solid gray;
+            background: #befc84;
+            width: 300px;
+            height: 300px;
+            overflow: auto;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .weather input{
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            width: 80%;
+        }
+        .ipadress{
+            border: 1px solid gray;
+            background: #befc84;
+            width: 300px;
+            height: 300px;
+            overflow: auto;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .ipadress input{
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>快递查询</h1>
+    <div class="kuaidi">
+        <span>请输入快递公司</span>
+        <input type="text" id="import1" value="圆通"/>
+        <span>请输入物流单号</span>
+        <input type="text" id="import12" value="12345678"/>
+        <input type="button" id="btn1" value="查询快递"/>
+        <div id="showInfo1"></div>
+    </div>
+</div>
+<div class="container">
+    <h1>翻译</h1>
+    <div class="fanyi">
+        <span>请输入需要翻译的文字</span>
+        <input type="text" id="import2" value="I love you！"/>
+        <input type="button" value="查询" id="btn2"/>
+        <div id="showInfo2"></div>
+    </div>
+</div>
+<div class="container">
+    <h1>天气查询</h1>
+    <div class="weather">
+        <span>请输入您的城市名称</span>
+        <input type="text" id="import3" value="上海"/>
+        <input type="button" value="查询" id="btn3"/>
+        <div id="showInfo3"></div>
+    </div>
+</div>
+<div class="container">
+    <h1>IP地址查询</h1>
+    <div class="ipadress">
+        <span>请输入ip或域名</span>
+        <input type="text" id="import4" value="www.baidu.com"/>
+        <input type="button" value="查询" id="btn4"/>
+        <div id="showInfo4"></div>
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script>
+
+    $(function(){
+        //快递查询
+        //http://api.asilu.com/express/?callback=jQuery19103040518630672784_1489638920649&id=12345678&com=圆通
+        $("#btn1").on("click",function(){
+            var company = $("#import1").val();
+            var id = $("#import12").val();
+            var url = "http://api.asilu.com/express/?id="+id+"&com="+company;
+            $.ajax({
+                type:"get",
+                dataType:"jsonp",
+                url:url,
+                jsonp:"callback",
+                success:function(data){
+                    /*var str = "";
+                    console.log(data.info.context[0].time);*/
+                    var str = "";
+                    if(data.status==0){
+                        for(var i=0; i<data.info.context.length; i++){
+                            str += "<p>时间:"+ data.info.context[i].time +"</P>";
+                            str += "<p>信息:"+ data.info.context[i].desc +"</P>";
+                            str += "<br/>"
+                        }
+                        $("#showInfo1").html(str);
+                    }else{
+                        $("#showInfo1").html(data.msg);
+                    }
+
+                }
+            })
+        });
+        //翻译
+        //http://api.asilu.com/fanyi/?callback=jQuery19103040518630672784_1489638920649&q=I+love+you
+        $("#btn2").on("click",function(){
+            var value = $("#import2").val();
+            var url = "http://api.asilu.com/fanyi/?q="+value;
+            $.ajax({
+                type:"get",
+                url:url,
+                dataType:"jsonp",
+                jsonp:"callback",
+                success:function(data){
+                    console.log(data);
+                    if(data.error == 0){
+                        var str = "";
+                        str += data.data;
+                        $("#showInfo2").html(str);
+                    }else{
+                        $("#showInfo2").html("出现了未知错误！");
+                    }
+                }
+            })
+        });
+        //天气查询
+        //http://api.asilu.com/weather/?callback=jQuery19103040518630672784_1489638920649&city=上海
+        $("#btn3").on("click",function(){
+            var value = $("#import3").val();
+            var url = "http://api.asilu.com/weather/?city="+value;
+            $.ajax({
+                type:"get",
+                url:url,
+                dataType:"jsonp",
+                jsonp:"callback",
+                success:function(data){
+                    console.log(data.weather[0].date);
+                    var str = "";
+                    str += "<p>城市名称："+data.city+"</P>";
+                    str += "<p>城市代号："+data.id+"</P>";
+                    str += "<p>pm25："+data.pm25+"</P>";
+                    for(var j=0; j<data.weather.length; j++){
+                        str += "<hr/>";
+                        str += "<p>日期："+data.weather[j].date+"</P>";
+                        str += "<p>温度："+data.weather[j].temp+"</p>";
+                        str += "<p>天气："+data.weather[j].weather+"</p>";
+                        str += "<p>风向："+data.weather[j].wind+"</p>";
+                    }
+                    $("#showInfo3").html(str);
+                }
+            })
+        });
+        //ip地址查询
+        //http://api.asilu.com/ip/?callback=jQuery19103040518630672784_1489638920647&ip=www.333333333333333.com
+        $("#btn4").on("click",function(){
+            var value = $("#import4").val();
+            var url = "http://api.asilu.com/ip/?ip="+value;
+            $.ajax({
+                type:"get",
+                url:url,
+                dataType:"jsonp",
+                jsonp:"callback",
+                success:function(data){
+                    console.log(data);
+                    var str = "";
+                    str += "<p>地址为："+data.dz+"</p>";
+                    str += "<p>IP为："+data.ip+"</p>";
+                    str += "<p>节点为："+data.wl+"</p>";
+                    $("#showInfo4").html(str);
+                }
+            })
+        })
+    });
+</script>
+</body>
+</html>

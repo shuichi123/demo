@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: url("images/bg.jpg");
+            overflow: hidden;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+        .singer{
+            width:235px;
+            height:235px;
+            position: absolute;
+            bottom: 100px;
+            margin-left: -125px;
+            left: 50%;
+            perspective:1000px;/*视距*/
+        }
+        .singer audio{
+            display: none;
+        }
+        .singer .scene{
+
+            transform-style:preserve-3D;/*子元素为3d模式*/
+            width:240px;
+            height:240px;
+            transform-origin:50%;/* 设置旋转的中心点*/
+            float:left;
+            margin-right:60px;
+            -webkit-animation:slide 18s linear infinite;
+            animation:slide 18s linear infinite;
+        }
+        .singer .scene li{
+            list-style:none;
+            width:235px;
+            height:235px;
+            border:5px solid #FE98D9;
+            position:absolute;
+        }
+        .scene ul li img{
+            width: 235px;
+            height: 235px;
+        }
+        .singer .scene ul li:nth-child(1){
+            transform: rotateY(0deg) translateZ(260px);
+        }
+        .singer .scene ul li:nth-child(2) {
+            transform: rotateY(60deg) translateZ(260px);
+        }
+        .singer .scene ul li:nth-child(3) {
+            transform: rotateY(120deg) translateZ(260px);
+        }
+        .singer .scene ul li:nth-child(4) {
+            transform: rotateY(180deg) translateZ(260px);
+        }
+        .singer .scene ul li:nth-child(5) {
+            transform: rotateY(240deg) translateZ(260px);
+        }
+        .singer .scene ul li:nth-child(6) {
+            transform: rotateY(300deg) translateZ(260px);
+        }
+        /*CSS3动画开始*/
+        @-webkit-keyframes  slide{
+            from{transform:rotateY(0deg);
+            }
+            to{transform:rotateY(360deg);
+            }
+        }
+        @keyframes  slide{
+            from{transform:rotateY(0deg);
+            }
+            to{transform:rotateY(360deg);
+            }
+        }
+        .singer .scene:hover{
+            -webkit-animation-play-state:paused;
+            animation-play-state:paused;
+        }
+        .singer .scene ul li:hover img{
+            transform:scale(1.2);
+            border:5px solid rgba(255,255,255,0.5);
+        }
+
+        /*xin动画*/
+        .xin{
+            position:fixed;
+            bottom:50px;
+            left:60px;
+            opacity:0;
+            -webkit-animation:xin 8s linear infinite;
+            animation:xin 8s linear infinite;
+        }
+        @-webkit-keyframes xin{
+            0%{opacity:1;}/*从什么时候开始*/
+            20%{bottom:300px; left:300px;opacity:0;}
+            40%{bottom:460px; left:680px;opacity:1;}
+            60%{bottom:300px; left:900px;opacity:0;}
+            80%{bottom:50px; left:1100px;opacity:1;}
+            100%{bottom:-150px; left:760px;opacity:0;}
+        }
+        @keyframes xin{
+            0%{opacity:1;}/*从什么时候开始*/
+            20%{bottom:300px; left:300px;opacity:0;}
+            40%{bottom:460px; left:680px;opacity:1;}
+            60%{bottom:300px; left:900px;opacity:0;}
+            80%{bottom:50px; left:1100px;opacity:1;}
+            100%{bottom:-150px; left:760px;opacity:0;}
+        }
+    </style>
+</head>
+<body>
+<div class="singer">
+    <audio src="like.mp3" autoplay controls loop></audio>
+    <div class="scene" >
+        <ul>
+            <li><img src="images/1.jpg" alt=""/></li>
+            <li><img src="images/2.jpg" alt=""/></li>
+            <li><img src="images/3.jpg" alt=""/></li>
+            <li><img src="images/4.jpg" alt=""/></li>
+            <li><img src="images/5.jpg" alt=""/></li>
+            <li><img src="images/6.jpg" alt=""/></li>
+        </ul>
+    </div>
+</div>
+<div class="xin">
+    <img src="images/xin.png" alt=""/>
+</div>
+</body>
+</html>

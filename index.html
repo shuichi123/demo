@@ -3,8 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: url("image/singer/bg.jpg");
+            -webkit-background-size: cover;
+            background-size: cover;
+            overflow: hidden;
+            cursor: url("image/shubiao4.png") 23 25,grab !important;
+        }
+        a{
+            cursor: url("image/shubiao3.png") 23 25,grab !important;
+        }
+        /*音乐*/
+        audio{
+            display: none;
+        }
+        /*歌手图片*/
+        .singer{
+            width: 240px;
+            height: 240px;
+            position: absolute;
+            bottom: 100px;
+            margin-left: -120px;
+            left: 50%;
+            perspective:1000px;
+        }
+        .singer .scene{
+            transform-style:preserve-3D;
+            transform-origin:50%;/* 设置旋转的中心点*/
+            -webkit-animation:slide 15s linear infinite;
+            animation: slide 15s infinite linear;
+        }
+        .singer li{
+            list-style: none;
+            width: 235px;
+            height: 235px;
+            border: 5px solid #e847d6;
+            position: absolute;
+        }
+        .singer li img{
+            width: 235px;
+            height: 235px;
+        }
+        .singer li:nth-child(1){
+            transform:rotateY(0deg) translateZ(260px) ;
+        }
+        .singer li:nth-child(2){
+            transform:rotateY(60deg) translateZ(260px) ;
+        }
+        .singer li:nth-child(3){
+            transform:rotateY(120deg) translateZ(260px) ;
+        }
+        .singer li:nth-child(4){
+            transform:rotateY(180deg) translateZ(260px) ;
+        }
+        .singer li:nth-child(5){
+            transform:rotateY(240deg) translateZ(260px) ;
+        }
+        .singer li:nth-child(6){
+            transform:rotateY(300deg) translateZ(260px) ;
+        }
+        /*动画*/
+        @-webkit-keyframes  slide{
+            from{
+                transform:rotateY(0deg);
+            }
+            to{
+                transform:rotateY(360deg);
+            }
+        }
+        @keyframes  slide{
+            from{
+                transform:rotateY(0deg);
+            }
+            to{
+                transform:rotateY(360deg);
+            }
+        }
+        /*鼠标放上去*/
+        .singer .scene:hover{
+            -webkit-animation-play-state:paused;
+            animation-play-state: paused;
+        }
+        .singer .scene li:hover img{
+            transform: scale(1.2);
+            border: 5px solid #8be87d;
+        }
+        /*xin*/
+        .xin1{
+            position: fixed;
+            -webkit-animation: xin1 8s linear infinite;;
+            -o-animation: xin1 8s linear infinite;;
+            animation: xin1 8s linear infinite;;
+        }
+        .xin2{
+            position: fixed;
+            -webkit-animation: xin2 8s linear infinite;;
+            -o-animation: xin2 8s linear infinite;;
+            animation: xin2 8s linear infinite;;
+        }
+        @keyframes xin1 {
+            0%{bottom:50px; left:60px; opacity:1;}
+            20%{bottom:300px; left:300px;opacity:0;}
+            40%{bottom:460px; left:680px;opacity:1;}
+            60%{bottom:300px; left:900px;opacity:0;}
+            80%{bottom:50px; left:1100px;opacity:1;}
+            100%{bottom:-150px; left:760px;opacity:0;}
+        }
+        @-webkit-keyframes xin1 {
+            0%{bottom:50px; left:60px; opacity:1;}
+            20%{bottom:300px; left:300px;opacity:0;}
+            40%{bottom:460px; left:680px;opacity:1;}
+            60%{bottom:300px; left:900px;opacity:0;}
+            80%{bottom:50px; left:1100px;opacity:1;}
+            100%{bottom:-150px; left:760px;opacity:0;}
+        }
+        @keyframes xin2 {
+            0%{bottom:-150px; left:760px;opacity:0;}
+            20%{bottom:50px; left:1100px;opacity:1;}
+            40%{bottom:300px; left:900px;opacity:0;}
+            60%{bottom:460px; left:680px;opacity:1;}
+            80%{bottom:300px; left:300px;opacity:0;}
+            100%{bottom:50px; left:60px; opacity:1;}
+        }
+        @-webkit-keyframes xin2 {
+            0%{bottom:-150px; left:760px;opacity:0;}
+            20%{bottom:50px; left:1100px;opacity:1;}
+            40%{bottom:300px; left:900px;opacity:0;}
+            60%{bottom:460px; left:680px;opacity:1;}
+            80%{bottom:300px; left:300px;opacity:0;}
+            100%{bottom:50px; left:60px; opacity:1;}
+        }
+        /*右侧about me*/
+        .aboutMe #btn{
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.5s;
+        }
+        .aboutMe .about-info{
+            position: fixed;
+            left: 0;
+            top: -200px;
+            width: 100%;
+            height: 200px;
+            background: #6897e8;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.5s;
+        }
+        .aboutMe .about-info-block{
+            display: inline-block;
+            width: 25%;
+            height: 150px;
+            margin: 50px auto;
+        }
+        .aboutMe .about-info-block a{
+            text-decoration: none;
+            color: white;
+        }
+        /*左侧导航栏*/
+        .nav{
+            position: fixed;
+            top: 100px;
+            left: 0;
+        }
+        .nav li{
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            list-style: none;
+            text-align: center;
+            background: #191722;
+            color: #e5fc4c;
+            position: relative;
+        }
+        .nav .subNav{
+            position: absolute;
+            right: -150px;
+            top: 0;
+            perspective:400px;
+            max-height: 0;
+        }
+        .nav .subNav li{
+            opacity: 0;
+            transform: rotateY(90deg);
+            transition: all 1s;
+        }
+        .nav>ul>li:hover .subNav li{
+            opacity: 1;
+            transform: none;
+        }
+        .nav a{
+            text-decoration: none;
+            color: #e847d6;
+        }
+    </style>
 </head>
 <body>
-<h1>hello world!</h1>
+<!--歌手图片-->
+<div class="singer">
+    <div class="scene">
+        <ul>
+            <li><img src="image/singer/1.jpg" alt=""/></li>
+            <li><img src="image/singer/2.jpg" alt=""/></li>
+            <li><img src="image/singer/3.jpg" alt=""/></li>
+            <li><img src="image/singer/4.jpg" alt=""/></li>
+            <li><img src="image/singer/5.jpg" alt=""/></li>
+            <li><img src="image/singer/6.jpg" alt=""/></li>
+        </ul>
+    </div>
+</div>
+<!--心动画-->
+<div class="xin1">
+    <img src="image/singer/xin.png" alt=""/>
+</div>
+<div class="xin2">
+    <img src="image/singer/xin.png" alt=""/>
+</div>
+<!--导航栏-->
+<div class="nav">
+    <ul>
+        <li class="lis">
+            <a href="#">关于表单</a>
+            <ul class="subNav">
+                <li><a href="">表单验证</a></li>
+                <li><a href="">表单验证</a></li>
+                <li><a href="">表单验证</a></li>
+                <li><a href="">表单验证</a></li>
+                <li><a href="">表单验证</a></li>
+            </ul>
+        </li>
+        <li class="lis">
+            <a href="#">关于图片</a>
+            <ul class="subNav">
+                <li><a href="">图片轮播</a></li>
+                <li><a href="">图片轮播</a></li>
+                <li><a onclick="window.open('aboutImage/qiege.html')">图片切割轮播</a></li>
+                <li><a href="">横向切割轮播</a></li>
+                <li><a href="">图片轮播</a></li>
+            </ul>
+        </li>
+        <li class="lis">
+            <a href="#">关于canvas</a>
+            <ul class="subNav">
+                <li><a  onclick="window.open('aboutCanvas/dancetree.html')">舞动的树</a></li>
+                <li><a href="">6</a></li>
+                <li><a href="">7</a></li>
+                <li><a href="">8</a></li>
+                <li><a href="">9</a></li>
+            </ul>
+        </li>
+        <li class="lis">
+            <a href="#">ajax和jsonp</a>
+            <ul class="subNav">
+                <li><a onclick="window.open('aboutAjax/baiduyixia.html')">模仿百度输入框</a></li>
+                <li><a onclick="window.open('aboutAjax/weather2.html')">查询天气</a></li>
+                <li><a onclick="window.open('aboutAjax/person.html')">身份信息校验</a></li>
+                <li><a onclick="window.open('aboutAjax/kuaidi.html')">查询快递等</a></li>
+                <li><a href="">9</a></li>
+            </ul>
+        </li>
+        <li class="lis">
+            <a href="#">其他(综合)</a>
+            <ul class="subNav">
+                <li><a href="">网页问答应用</a></li>
+                <li><a href="">判断鼠标方向</a></li>
+                <li><a href="">7</a></li>
+                <li><a href="">8</a></li>
+                <li><a href="">9</a></li>
+            </ul>
+        </li>
+        <li class="lis">
+            <a href="#">他人作品欣赏</a>
+            <ul class="subNav">
+                <li><a onclick="window.open('otherpeople/3dImage/index.html')">3d空间立体相册</a></li>
+                <li><a href="">6</a></li>
+                <li><a href="">7</a></li>
+                <li><a href="">8</a></li>
+                <li><a href="">9</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!--about ME-->
+<div class="aboutMe">
+    <a href="#" id="btn">ABOUT ME</a>
+    <div class="about-info" >
+        <div class="about-info-block">
+            <h1>WEBSITED BY</h1>
+            <P><a href="#">王东斌</a></P>
+            <h1>PHONE</h1>
+            <P>13122313320</P>
+        </div>
+        <div class="about-info-block">
+            <h1>UNIVERSITY</h1>
+            <P><a href="#">华东理工大学</a></P>
+            <h1>EMAIL</h1>
+            <P>2281918199@qq.com</P>
+        </div>
+        <div class="about-info-block">
+            <h1>ADDRESS</h1>
+            <P>上海，徐汇</P>
+            <h1>JOB</h1>
+            <P>students</P>
+        </div>
+    </div>
+</div>
+<!--音乐-->
+<audio src="music/like.mp3" autoplay controls loop="loop"></audio>
+
+<!--脚本-->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script>
+    document.body.style.width = window.innerWidth+"px";
+    document.body.style.height = window.innerHeight+"px";
+    /*window.onload=function(){
+        document.getElementsByTagName("body")[0].style.width = window.innerWidth+"px";
+        document.getElementsByTagName("body")[0].style.height = window.innerHeight+"px";
+    };*/
+    //右侧about me
+    var countBtn=0;
+    $("#btn").click(function(){
+
+        if(countBtn==0){
+            countBtn=1;
+            $(".about-info").css({top:0});
+            $(this).css({top:220+"px"});
+        }else{
+            countBtn=0;
+            $(".about-info").css({top:-200+"px"});
+            $(this).css({top:20+"px"});
+        }
+    });
+    //左侧导航栏
+    $(".lis").mouseenter(function(){
+        $(this).find("li").each(function(index){
+            $(this).css("transition-delay",index*0.2+"s")
+        })
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: black;
+        }
+        /*login区域*/
+        .login{
+            background: yellow;
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            margin-left: -200px;
+            margin-top: -150px;
+            left: 50%;
+            top: 50%;
+            text-align: center;
+            z-index: 100;
+        }
+        .login label{
+            display: block;
+            margin: 50px ;
+        }
+        .login>input{
+            margin: 0 50px;
+        }
+        /*整个容器*/
+        .container{
+            position: relative;
+            height: 600px;
+            width: 100%;
+            background: black;
+            color: black;
+        }
+        /*上部区域*/
+        #welcome{
+            color: white;
+            font-size: 20px;
+        }
+        h1{
+            color: white;
+            text-align: center;
+        }
+        #submit{
+            display: block;
+            position: absolute;
+            right: 30%;
+        }
+        /*问题*/
+        #questionArea{
+            position: absolute;
+            background: #cafcff;
+            width: 100%;
+            height: 300px;
+            margin-top: -150px;
+            top: 40%;
+            text-align: center;
+        }
+        li{
+            display: none;
+        }
+        li.active{
+            display: block;
+            animation: slide 0.5s ;
+        }
+        @keyframes slide {
+            0%{
+                opacity: 0.75;
+                top: 30%;
+            }
+            100%{
+                opacity: 1;
+                top: 40%;
+            }
+        }
+        #question{
+            font-size: 45px;
+            margin: 50px;
+        }
+        #choices label{
+            font-size: 20px;
+            margin: 10px 100px;
+        }
+        #choices input{
+            margin: 0 10px;
+        }
+        /*上一题与下一题*/
+        .control{
+            position: relative;
+            top: 70%;
+        }
+        #prev{
+            position: absolute;
+            left: 40%;
+        }
+        #next{
+            position: absolute;
+            right:40%;
+        }
+    </style>
+</head>
+<body>
+<div class="login">
+    <h1>请登录</h1>
+    <label >账号:<input type="text" placeholder="请输入4位以上字母" id="zhanghao"/></label>
+    <label >密码:<input type="text" placeholder="请输入6位以上字母" id="mima"/></label>
+    <input type="button" value="登入" id="dengru"/>
+    <input type="button" value="注册" id="zhuce"/>
+</div>
+<div class="container">
+    <span id="welcome"></span>
+    <h1>问答测试</h1>
+    <input type="button" value="提交" id="submit"/>
+    <form id="questionArea">
+        <!--ul/li-->
+        <!--<div id="question"></div>
+        <div id="choices">
+            <label for="A" class="A"><input type="radio" id="A" name="question1"/></label>
+            <label for="B" class="B"><input type="radio" id="B" name="question1"/></label>
+            <label for="C" class="C"><input type="radio" id="C" name="question1"/></label>
+            <label for="D" class="D"><input type="radio" id="D" name="question1"/></label>
+        </div>-->
+    </form>
+    <div class="control">
+        <input type="button" value="上一题" id="prev" style="display: none;"/>
+        <input type="button" value="下一题" id="next"/>
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script>
+    //Question对象
+    function Question(option){
+        this.question = option.question||"1+2=?";
+        this.A = option.A||1;
+        this.B = option.B||2;
+        this.C = option.C||3;
+        this.D = option.D||4;
+        this.answer = option.answer||3;
+        this.name = option.name||"question1";
+    }
+    Question.prototype ={
+        bindDOM : function(){
+            var str = "";
+            str += '<li>';
+            str += '<div id="question">'+this.question+'</div>';
+            str += '<div id="choices">';
+            str += '<label for="A" class="A"><input type="radio" value="A" id="A" name="'+this.name+'"/>'+this.A+'</label>';
+            str += '<label for="B" class="B"><input type="radio" value="B" id="B" name="'+this.name+'"/>'+this.B+'</label>';
+            str += '<label for="C" class="C"><input type="radio" value="C" id="C" name="'+this.name+'"/>'+this.C+'</label>';
+            str += '<label for="D" class="D"><input type="radio" value="D" id="D" name="'+this.name+'"/>'+this.D+'</label>';
+            str += '</div>';
+            str += '</li>';
+            return str;
+        }
+    };
+    //问题集合(数据)
+    var allQuestions = [{question:"1+2=?",A:1,B:2,C:3,D:4,answer:"C",name:"question1"},
+        {question:"2+2=?",A:1,B:2,C:4,D:5,answer:"C",name:"question2"},
+        {question:"3+2=?",A:1,B:2,C:5,D:4,answer:"C",name:"question3"},
+        {question:"4+2=?",A:1,B:2,C:6,D:4,answer:"C",name:"question4"},
+        {question:"5+2=?",A:1,B:2,C:7,D:4,answer:"C",name:"question5"},
+        {question:"6+2=?",A:1,B:2,C:8,D:4,answer:"C",name:"question6"},
+        {question:"7+2=?",A:1,B:2,C:9,D:4,answer:"C",name:"question7"}
+    ];
+    //初始化
+    $(function(){
+        //绑定DOM
+        var str = '<ul>';
+        var questionArea = document.getElementById("questionArea");
+        for(var j=0; j<allQuestions.length; j++){
+            var question = new Question(allQuestions[j]);
+            str += question.bindDOM();
+        }
+        str += '</ul>';
+        questionArea.innerHTML = str;
+
+        //第一个li初始时显示
+        var liObj = document.getElementsByTagName("li");
+        liObj[0].className = "active";
+
+        //鼠标点击next事件
+        var i=0;
+        $("#next").on("click",function(){
+            var radio = document.getElementsByName("question"+(i+1));
+            if(radio[0].checked==true||radio[1].checked==true||radio[2].checked==true||radio[3].checked==true){
+                liObj[i].className = "";
+                i++;
+                if(i>=allQuestions.length-1){
+                    i = allQuestions.length-1;
+                    $("#next").hide();
+                }
+                $("#prev").show();
+                liObj[i].className = "active";
+            }else{
+                alert("你还没选择!");
+            }
+
+        });
+
+        //鼠标点击prev事件
+        $("#prev").on("click",function(){
+            liObj[i].className = "";
+            i--;
+            if(i<=0){
+                i = 0;
+                $("#prev").hide();
+            }
+            $("#next").show();
+            liObj[i].className = "active";
+        });
+
+        //提交事件
+        $("#submit").on("click",function(){
+            var radio = document.getElementsByName("question"+allQuestions.length);
+            if(radio[0].checked==true||radio[1].checked==true||radio[2].checked==true||radio[3].checked==true){
+                var num=0;
+                var yourAnswer;
+                for(var i=0; i<allQuestions.length; i++){
+                    var question = document.getElementsByName("question"+(i+1));
+                    for(var j=0; j<4; j++){
+                        if(question[j].checked == true){
+                            yourAnswer = question[j].value;
+                        }
+                    }
+                    if(allQuestions[i].answer == yourAnswer){
+                        num++;
+                    }
+                }
+                questionArea.innerHTML = "<h1 style='color:purple'>你的得分是"+num/allQuestions.length*100+"分,总分为一百分。</h1>";
+                $("#prev").hide();
+            }else{
+                alert("还没写完?再检查一下吧！");
+            }
+        });
+        //login
+        $("#zhanghao").on("blur",function(){
+            if($(this).val().length < 4){
+                alert("请输入4位以上字母");
+            }
+        });
+        $("#mima").on("blur",function(){
+            if($(this).val().length < 6){
+                alert("请输入6位以上字母");
+            }
+        });
+        //登入事件
+        $("#dengru").on("click",function(){
+
+        });
+        //注册事件
+        $("#zhuce").on("click",function(){
+            localStorage["zhanghao"] = $("#zhanghao").val();
+            localStorage["mima"] = $("#mima").val();
+            $("#welcome").html("welcome "+localStorage["zhanghao"]+"!");
+            $(".login").hide();
+        });
+    });
+</script>
+</body>
+</html>

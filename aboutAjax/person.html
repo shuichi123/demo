@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>身份信息校验</title>
+    <style>
+        .searchPerson{
+            border: 1px solid black;
+            text-align: center;
+            margin: 50px auto;
+            background: #cffc48;
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="searchPerson">
+    <input type="text" id="import" placeholder="请输入身份证号"/>
+    <input type="button" id="btn" value="查询身份信息"/>
+    <div id="showInfo">
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script>
+    //身份证信息
+    //http://api.asilu.com/idcard/?callback=jQuery19103040518630672784_1489638920649&id=152502199405148245&_=1489638920662
+    //http://api.asilu.com/fanyi/?q=I+love+you
+    $(function(){
+        $("#btn").on("click",function(){
+            var value = $("#import").val();
+            /*alert(typeof value);*/
+            if(value.length != 18){
+                alert("您输入的密码有错误！请重新输入！");
+                $("#import").val("请输入身份证号");
+            }else{
+                var url = "http://api.asilu.com/idcard/?id="+value;
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    //jsonpCallback: ,
+                    success: function (data) {
+                        console.log(data);
+                        var str = "";
+                        str += "<p>出生地:"+data.addr+"</p>";
+                        str += "<p>出生日期:"+data.date+"</p>";
+                        str += "<p>性别:"+data.sex+"</p>";
+                        $("#showInfo").html(str);
+                    }
+                })
+            }
+
+
+        })
+    })
+</script>
+</body>
+</html>

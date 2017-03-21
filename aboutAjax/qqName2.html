@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="searchQQName"></div>
+<input type="text" id="qqName"/>
+<input type="button" value="查询" id="btn"/>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script>
+    $(function(){
+        $("#btn").on("click",function(){
+            var qq = $("#qqName").val();
+            alert(qq);
+            $.ajax({
+                type: "get",
+                url: 'http://r.pengyou.com/fcg-bin/cgi_get_portrait.fcg?uins=' + qq,
+                dataType: "jsonp",
+                jsonp: "callback",
+                jsonpCallback: "portraitCallBack",
+                success: function (data) {
+                    for (var key in data) {
+                        alert("QQ：" + key);
+                    }
+                    alert("昵称："+data[qq][6]);
+                }
+            })
+        })
+    });
+
+</script>
+</body>
+</html>

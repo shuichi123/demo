@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<select name="weather" id="city">
+    <option value="101120101">济南</option>
+    <option value="101010100">北京</option>
+    <option value="101020100">上海</option>
+    <option value="101280101">广州</option>
+    <option value="101280601">深圳</option>
+</select>
+<input type="button" value="查询" id="search"/>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script>
+    //http://api.asilu.com/weather/?callback=jQuery19103040518630672784_1489638920649&city=上海
+    $(function(){
+        $("#search").on("click",function(){
+            var cityName = $("#city").val();
+            var url = 'http://cdn.weather.hao.360.cn/api_weather_info.php?app=hao360&_jsonp=MyWeather&code='+cityName;
+            querySearch(url);
+        })
+    });
+    function querySearch(url){
+        $.ajax({
+            type:"get",
+            async:true,
+            url:url,
+            dataType:"jsonp",
+            /*jsonp:"cb",*/
+            /*jsonpCallback:"callback",*/
+            success:function(data){
+                console.log(123);
+                /*var ul=$("<ul></ul>");
+                $.each(data.s,function(index,ele){
+                    var e=$("<li></li>").append(ele);
+                    $(ul).append(e);
+                });
+                $("#list").append(ul);*/
+            },
+            /*MyWeather:function(data){
+                console.log(data);
+            }*/
+            /*error:function(data){
+                console.log("fail");
+            }*/
+        });
+    }
+    function MyWeather(data){
+        console.log(data);
+    }
+</script>
+</body>
+</html>
