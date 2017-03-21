@@ -349,6 +349,10 @@
             $(this).css("transition-delay",index*0.2+"s")
         })
     });
+    //禁止a链接默认的点击事件
+    $("a").on("click",function(e){
+        e.preventDefault();
+    })
 </script>
 </body>
 </html>
