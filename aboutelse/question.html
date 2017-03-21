@@ -114,7 +114,7 @@
     <input type="button" value="登入" id="dengru"/>
     <input type="button" value="注册" id="zhuce"/>
 </div>
-<div class="container">
+<div class="container" style="display: none;">
     <span id="welcome"></span>
     <h1>问答测试</h1>
     <input type="button" value="提交" id="submit"/>
@@ -261,6 +261,7 @@
             localStorage["mima"] = $("#mima").val();
             $("#welcome").html("welcome "+localStorage["zhanghao"]+"!");
             $(".login").hide();
+            $(".container").show();
         });
     });
 </script>
