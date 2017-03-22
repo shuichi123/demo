@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection"content="telephone=no, email=no" />
+    <title>Document</title>
+    <style>
+        #id {
+            width: 1150px;
+            height: 150px;
+            background: red;
+            position: absolute;
+            left: 0;
+        }
+        .id {
+            width: 40px;
+            height: 150px;
+            background: green;
+            border: solid 1px grey;
+            float: left;
+
+        }
+    </style>
+</head>
+<body>
+<div id="inp"></div>
+<div id="id" style="left:0;">
+    <div class="id">1</div>
+    <div class="id">2</div><div class="id"></div><div class="id"></div><div class="id"></div><div class="id"></div>
+</div>
+</body>
+<script>
+    function load (){
+
+        /*单指拖动*/
+        var obj = document.getElementById('id');
+        obj.addEventListener("touchstart", function(event) {
+            var touch = event.targetTouches[0];
+            var left = parseInt(obj.style.left);
+            // alert(left);  
+            var x = touch.pageX - left;
+            var y = touch.pageY - left;
+            obj.addEventListener('touchmove', function(event) {
+                // 如果这个元素的位置内只有一个手指的话  
+
+                if (event.targetTouches.length == 1) {
+                    event.preventDefault(); // 阻止浏览器默认事件，重要   
+                    var touch = event.targetTouches[0];
+                    // 把元素放在手指所在的位置  
+
+                    obj.style.left = touch.pageX - x + 'px';
+                    // obj.style.top = touch.pageY + 'px';  
+                }
+            }, false);
+
+        });
+        obj.addEventListener("touchend",function(){
+            obj.removeEventListener("touchstart");
+            obj.removeEventListener("touchmove");
+        });
+    }
+    window.addEventListener('load',load, false);
+</script>
+</html>

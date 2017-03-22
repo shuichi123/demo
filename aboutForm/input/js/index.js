@@ -3,7 +3,7 @@ console.clear();
 var MAX_LIFE = 50;
 var canvas = document.querySelector('canvas');
 var input = document.querySelector('input');
-var field = {}
+var field = {};
 var hasFocus = false;
 var caret = document.createElement('span');
 caret.style.cssText = document.defaultView.getComputedStyle(input, '').cssText;
@@ -23,10 +23,10 @@ reposition();
 
 input.onfocus = function() {
 	hasFocus = true
-}
+};
 input.onblur = function() {
 	hasFocus = false
-}
+};
 
 function rain() {
 
@@ -40,7 +40,6 @@ function burst(intensity) {
 	];
 
 	var size = .75;
-	``
 	var force = .7;
 	var lifeMin = 0;
 	var progress = Math.min(field.width, caret.offsetWidth) / field.width;
@@ -192,7 +191,7 @@ var Random = {
 	between: function(min, max) {
 		return min + (Math.random() * (max - min));
 	}
-}
+};
 
 /**
  * 2D Vector Class
@@ -308,7 +307,7 @@ Vector.prototype = {
 	toString: function() {
 		return this._x + ', ' + this._y;
 	}
-}
+};
 
 /**
  * Particle Class
@@ -364,7 +363,7 @@ Particle.prototype = {
 	toString: function() {
 		return 'Particle(' + this._id + ') ' + this._life + ' pos: ' + this._position + ' vec: ' + this._velocity;
 	}
-}
+};
 
 // setup DOM
 function simulate(dimensions, options) {
@@ -553,7 +552,7 @@ function simulate(dimensions, options) {
 				context.fillStyle = color;
 				context.fill();
 			}
-		}
+		};
 
 		this.behavior = {
 			cohesion: function(range, speed) {
@@ -844,7 +843,7 @@ function simulate(dimensions, options) {
 					}
 				}
 			}
-		}
+		};
 
 		// public
 		Object.defineProperties(this, {
